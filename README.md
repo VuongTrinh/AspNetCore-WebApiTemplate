@@ -16,3 +16,23 @@ AspNetCore.Diagnostics.HealthChecks - For performing health checks
 Microsoft.AspNetCore.Diagnostics.HealthChecks - For getting the results of Health Checks in the application  
 AspNetCore.HealthChecks.UI - For Health Status visualization  
 xUnit and Moq - For unit testing
+
+## Key Takeaways 
+Configured Sample Code for database CRUD operations  
+Configured Basic Data Access using Dapper  
+Configured Logging using Serilog  
+Configured AutoMapper for mapping entity models to DTOs  
+Configured FluentValidation for DTO validations  
+Configured AutoWrapper for handling request exceptions and consistent Http response format  
+Configured AutoWrapper.Server for unwrapping the Result attribute from AutoWrapper's ApiResponse output  
+Configured Swagger API Documentation  
+Configured CORS  
+Configured JWT Authorization and Validation  
+Configured Sample Code for Requesting Client Credentials Token  
+Configured Swagger to secure API documentation with Bearer Authorization  
+Configured Sample Code for connecting Protected External APIs  
+Configured Sample Code for implementing custom API Pagination  
+Configured HttpClient Resilience and Transient fault-handling  
+Configured Http Request Rate Limiter  
+Configured HealthChecks and HealthChecksUI  
+Configured Unit Test Project  
