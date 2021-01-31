@@ -1,5 +1,6 @@
 using AspNetCoreRateLimit;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -35,7 +36,8 @@ namespace WebApi
             services.AddServicesInAssembly(Configuration);
 
             services.AddControllers()
-                    .AddNewtonsoftJson(ops => { ops.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; });
+                    .AddNewtonsoftJson(ops => { ops.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; })
+                    .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
 
             //Register Automapper
             services.AddAutoMapper(typeof(MappingProfileConfiguration));
