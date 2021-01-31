@@ -51,6 +51,9 @@ namespace WebApi
 
             app.UseRouting();
 
+            //Enable CORS
+            app.UseCors("AllowAll");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
