@@ -65,7 +65,10 @@ namespace WebApi
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            }).UseHealthChecksUI();
+            }).UseHealthChecksUI(setup =>
+            {
+                setup.AddCustomStylesheet($"{env.ContentRootPath}/Infrastructure/HealthChecks/Ux/branding.css");
+            });
 
             //Enable AspNetCoreRateLimit
             app.UseIpRateLimiting();
