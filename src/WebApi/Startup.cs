@@ -1,4 +1,7 @@
+using AspNetCoreRateLimit;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +32,8 @@ namespace WebApi
             //Register services in Installers folder
             services.AddServicesInAssembly(Configuration);
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(ops => { ops.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +52,16 @@ namespace WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiTemplate ASP.NET Core API v1");
             });
+
+            //Enable HealthChecks and UI
+            app.UseHealthChecks("/selfcheck", new HealthCheckOptions
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            }).UseHealthChecksUI();
+
+            //Enable AspNetCoreRateLimit
+            app.UseIpRateLimiting();
 
             app.UseRouting();
 
