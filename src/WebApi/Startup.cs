@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Infrastructure.Extensions;
 
 namespace WebApi
 {
@@ -25,6 +26,9 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Register services in Installers folder
+            services.AddServicesInAssembly(Configuration);
+
             services.AddControllers();
         }
 
@@ -37,6 +41,13 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+
+            //Enable Swagger and SwaggerUI
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiTemplate ASP.NET Core API v1");
+            });
 
             app.UseRouting();
 
