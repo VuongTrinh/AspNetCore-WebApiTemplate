@@ -1,4 +1,5 @@
 using AspNetCoreRateLimit;
+using AutoMapper;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Infrastructure.Configs;
 using WebApi.Infrastructure.Extensions;
 
 namespace WebApi
@@ -34,6 +36,9 @@ namespace WebApi
 
             services.AddControllers()
                     .AddNewtonsoftJson(ops => { ops.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; });
+
+            //Register Automapper
+            services.AddAutoMapper(typeof(MappingProfileConfiguration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
